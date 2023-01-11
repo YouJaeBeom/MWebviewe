@@ -21,7 +21,7 @@ class MainWindow(QMainWindow):
         file.close()
 
         print(url_list)
-        windowTextSize = item[value[0]].split("X")
+        windowTextSize = value.split("X")
         window_rows = windowTextSize[0]
         window_cols = windowTextSize[1]
         window_size = int(window_rows)*int(window_cols)
@@ -175,56 +175,38 @@ class MainWindow(QMainWindow):
         browser.setUrl(q)
 
 
-class App(tk.Tk):
+class App(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.geometry('300x200')
-        self.title('Main Window')
+        self.setWindowTitle('multiple window setting page (by:ych)')
+        self.resize(500, 200)
+        #self.title("multiple window setting page (by:ych)")
 
-
-        # 생성할 window 창의 크기 및 초기 위치 설정 매서드: geometry()
-        window_width = 400
-        window_height = 200
-        window_pos_x = 700
-        window_pos_y = 100
-
-        self.geometry("{}x{}+{}+{}".format(window_width, window_height, window_pos_x, window_pos_y))
-
-        # 생성한 Window 창의 크기 조절 가능 여부 설정: resizable()
-        self.resizable(False, False)   # True, False 대신 1, 0을 사용할 수 있음
-
-        # 생성한 Window 창의 Title 설정: title()
-        self.title("multiple window setting page (by:ych)")
-
-        # 생성한 Window 창의 Icon 설정: iconphoto()
-        #window.iconphoto(False, tkinter.PhotoImage(file="icon1.png"))
-
-        # tkinter.Label 클래스 선언 및 Button 위젯 생성
-        self.listbox_1 = tk.Listbox(self, highlightbackground="red", highlightcolor="green", selectforeground="white", selectbackground="black", selectmode="single")
-        
+        # 리스트 사용하여 데이터를 추가한 ComboBox
+        self.combo_list = QComboBox(self)
         for i in range(len(item)):
-            self.listbox_1.insert(i, item[i])
+            #self.listbox_1.insert(i, item[i])
+            self.combo_list.addItem(item[i])
+        self.combo_list.move(50,100)
 
-        #def return_value(v): print(f'Listbox 선택 항목 위치 반환값: {self.listbox_1.curselection()}')
-        self.button_test = tk.Button(self, text="Open", command= self.open_window)
-        #self.button_test = tk.Button(self, text="선택값 반환", command= lambda: [self.open_window, self.destroy()] )
-        
-        # 생성한 Label 위젯을 pack() 매서드로 배치
-        self.listbox_1.pack()
-        self.button_test.pack()
-    
-    def open_window(self):
-        app = QApplication(sys.argv)
-        app.setApplicationName("MooseAche")
-        app.setOrganizationName("MooseAche")
-        app.setOrganizationDomain("MooseAche.org")
+        self.list_button = QPushButton(self)
+        self.list_button.move(200, 100)
+        self.list_button.setText('Open')
+        self.list_button.clicked.connect(self.button_event)
 
-        window = MainWindow(self.listbox_1.curselection())
+        self.show()
 
-        app.exec_()
+    def button_event(self):
+        list_text = self.combo_list.currentText()
+        self.w = MainWindow(list_text)
+        self.w.show()
+        self.hide()
 
 
 if __name__ == "__main__":
-    app = App()
-    app.mainloop()
+
+    app = QApplication(sys.argv)
+    window = App()
+
+    sys.exit(app.exec())
