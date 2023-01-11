@@ -64,7 +64,12 @@ class MainWindow(QMainWindow):
         server_name = para.split("!!")[1]
 
         browser = QWebEngineView()
-        browser.setUrl(QUrl(url))
+        #browser.setUrl(QUrl(url))
+        browser.load(QUrl(url))
+        
+        browser.settings().setAttribute(QWebEngineSettings.JavascriptCanOpenWindows, True)
+        browser.settings().setAttribute(QWebEngineSettings.JavascriptEnabled, True)
+
         
         title_frame =QFrame()
         title_frame.setMaximumHeight(30)
