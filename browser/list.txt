@@ -1,5 +1,6 @@
-https://www.youtube.com/!!유튜브
-https://cse.snu.ac.kr/node/29041!!컴공
-https://github.com/YouJaeBeom!!github
-http://211.34.127.106:8080/secure/ltx_conf.htm!!testserver
-http://211.34.127.106/wmf/index.html!!what
+admin/010-5231-9187,what,http://211.34.127.106/wmf/index.html#/uni/channel
+None,구글,https://www.google.com/
+None,스포츠뉴스,https://sports.news.naver.com/index
+None,ip,http://211.34.127.106:8080/secure/ltx_conf.htm
+None,네이버,https://www.naver.com/
+None,다음,https://www.daum.net/
